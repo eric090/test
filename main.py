@@ -1,10 +1,10 @@
-import list
+import user
 import os.path
-
+from user import newUser
 if os.path.isfile('names.pkl'):
     print("File already exist")
 else:
-    list.newfile()
+    user.newfile()
 
 def main():
     print ("Select option:\n")
@@ -13,6 +13,8 @@ def main():
     print("3 - Show users\n")
     print("4 - Add Assists\n")
     print("9 - Exit")
+newUser("Paco", 0)
+newUser("pepe", 0)
 while True:
     main()
     optionMenu = input("Insert value >> ")
@@ -20,21 +22,22 @@ while True:
         print("")
         print("Has pulsado la opción 1...\n")
         name = input("Insert name: ")
-        list.newUser(name)
+
+        user.newUser(name, 0)
     elif optionMenu == "2":
         print("")
         print("Has pulsado la opción 2...\n")
         name = input("Insert name: ")
-        list.deleteUser(name)
+        user.deleteUser(name)
     elif optionMenu == "3":
         print("")
         print("Has pulsado la opción 3...\n")
-        list.showList()
+        user.showList()
     elif optionMenu == "4":
         print("")
         print("Has pulsado la opción 4...\n")
         name = input("Insert name: ")
-        list.add_assist(name)
+        user.add_assist(name)
        # asssist()
     elif optionMenu == "9":
         break
