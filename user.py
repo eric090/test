@@ -76,19 +76,9 @@ def getParameters():
         print (data[i])
 def getName():
     os.system('cls')
-        #print(x for x, y in collections.Counter(data["points"]).items() if y > 1)
-
-
-
-    values= []
 
     for value in data:
-        #list_points.append(value["attendance"])
-        #list_attendance.append(value["attendance"])
-        #list_names.append(value["names"])
-        #values.append(value['name']+str(value['points']/value['attendance']))
         for value2 in data:
-            #print(value['name'] + ": " + str(value['points']/value['attendance']) + "\t" + value2['name'] + ": " +str(value['points']/value['attendance']))
             first_value = value['points']/value['attendance']
             second_value = value2['points']/value2['attendance']
             if (first_value <= second_value) & (value['name'] != value2['name']):
