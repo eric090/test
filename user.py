@@ -1,10 +1,6 @@
 import os
 import pickle
 
-
-
-#list_names = ['Otger B.', 'Juan B.', 'Laia C.', 'Jorge G.', 'Alex G.', 'Pepe I.', 'Jorge J.', 'Oscar M.', 'Julià M.', 'Eric P.', 'Cristobal P.', 'David R.', 'Marti V.']
-#names = {'Names': list_names}
 data = []
 
 def newfile():
@@ -12,9 +8,9 @@ def newfile():
     F.close()
     print("File created")
 
-def newUser(name, assist, point):
+def newUser(name, attendance, point):
     os.system('cls')
-    a = {'name': name, 'assist': assist, 'points': point}
+    a = {'name': name, 'attendance': attendance, 'points': point}
     data.append(a)
     print(len(data))
     #list_names.append(a)
@@ -43,43 +39,77 @@ def showList():
     print(pickle.load(e))
 
 
-def add_assist(name):
+def addAttendance(name):
     os.system('cls')
     error = True
-    print("add assist to: " + name)
+    print("add attendance to: " + name)
     for value in data:
         if name == value["name"]:
-            value["assist"] += 1
+            value["attendance"] += 1
             F = open('names.pkl', 'wb')
             pickle.dump(data, F)
             F.close()
-            print("Assist added successfully")
+            print("attendance added successfully")
             error = False
     if error:
         print("Name incorrect, please enter the name again")
 
-def add_point(name):
+def addPoint(name):
     os.system('cls')
     error = True
     print("add point to: " + name)
     for value in data:
         if name == value["name"]:
             value["points"] += 1
+
             F = open('names.pkl', 'wb')
             pickle.dump(data, F)
             F.close()
             print("Point added successfully")
             error = False
+
     if error:
         print("Name incorrect, please enter the name again")
-def getparameters():
+def getParameters():
     os.system('cls')
-    F = open('names.pkl', 'rb')
-    E = pickle.load(F)
     for i in range(0, len(data)):
         print (data[i])
-def getname():
-    
+def getName():
+    os.system('cls')
+        #print(x for x, y in collections.Counter(data["points"]).items() if y > 1)
+
+
+
+    values= []
+
+    for value in data:
+        #list_points.append(value["attendance"])
+        #list_attendance.append(value["attendance"])
+        #list_names.append(value["names"])
+        #values.append(value['name']+str(value['points']/value['attendance']))
+        for value2 in data:
+            #print(value['name'] + ": " + str(value['points']/value['attendance']) + "\t" + value2['name'] + ": " +str(value['points']/value['attendance']))
+            first_value = value['points']/value['attendance']
+            second_value = value2['points']/value2['attendance']
+            if (first_value <= second_value) & (value['name'] != value2['name']):
+                selection = str(value['name'] + ": " + "with the value: " + str(value['points']/value['attendance']))
+
+    print(selection)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
