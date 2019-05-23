@@ -1,31 +1,51 @@
 import pickle
 import os.path
-a = {'name': "NAME", 'attendance': "ATTENDANCE", 'points': "POINTS", 'rate': "RATE"}
-def newFile():
-    F = open('names.pkl', 'wb')
-    F.close()
+
+FILENAME = 'names.pkl'
+
+UID = 0
 
 
-def saveFile(info):
-    F = open('names.pkl', 'wb')
-    pickle.dump(info, F)
-    F.close()
-
-
-def loadFile():
-    # pickle.load(open('names.pkl', 'rb'))
-    if os.path.isfile('names.pkl'):
-        F = open('names.pkl', 'rb')
-    else:
-        print("file created")
-        F = open('names.pkl', 'wb')
-        F.close()
-        F = open('names.pkl', 'rb')
-
+def get_data():
+    if not os.path.isfile(FILENAME):
+        pickle.dump({"uid": 0, "users": []}, open(FILENAME, 'wb'))
     try:
-        return pickle.load(F)
+        ofile = open(FILENAME, 'rb')
+        data = pickle.load(ofile)
+        global UID
+        UID = data['uid']
+    # except Exception, ex:
+    #   print "Exception: ", ex.message
+    finally:
+        ofile.close()
+    return data['users']
 
-    except EOFError:
-        return a
 
-    F.close()
+def save_user(user):
+    try:
+        ofile = open(FILENAME, 'rb')
+        data = pickle.load(ofile)
+        ofile.close()
+        data['users'].append(user.toDict())
+        pickle.dump(data, open(FILENAME, 'wb'))
+    # except Exception, ex:
+    # print "Exception: ", ex.message
+    finally:
+        ofile.close()
+    pickle.dump(data, open(FILENAME, 'wb'))
+
+
+def get_uid():
+    global UID
+    UID += 1
+    try:
+        ofile = open(FILENAME, 'rb')
+        data = pickle.load(ofile)
+        ofile.close()
+        data['uid'] = UID
+        pickle.dump(data, open(FILENAME, 'wb'))
+    except:
+        pass
+    finally:
+        ofile.close()
+    return UID

@@ -1,8 +1,7 @@
 from user import Users
+import pprint
 
+users_handler = Users()
+pprint.pprint(users_handler.getUsersInfo())
 
-newUser = Users("Juan", 0, 1, 0)
-
-l_points = newUser.getPoints("Juan")
-print(str(l_points))
 
